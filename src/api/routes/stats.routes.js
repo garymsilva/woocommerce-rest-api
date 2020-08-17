@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const controller = require('../controllers/stats.controllers');
 
-router.get('/', function (req, res) {
-  res.send('GET /stats // TODO');
-});
+router.get('/', controller.getStats);
 
 module.exports = router;
