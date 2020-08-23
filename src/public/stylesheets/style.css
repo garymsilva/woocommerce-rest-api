@@ -1,8 +1,19 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.form-control {
+  height: unset;
 }
 
-a {
-  color: #00B7FF;
+#post-product-body, #put-product-body {
+  font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
 }
+
+/* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
+@media (min-width: 576px) { }
+
+/* Dispositivos médios (tablets com 768px ou mais) */
+@media (min-width: 768px) { }
+
+/* Dispositivos large (desktops com 992px ou mais) */
+@media (min-width: 992px) { }
+
+/* Dispositivos extra large (desktops grandes com 1200px ou mais) */
+@media (min-width: 1200px) { }

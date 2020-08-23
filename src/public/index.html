@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="./stylesheets/style.css">
+  <title>WooCommerce API</title>
+</head>
+<body>
+  <nav class="navbar navbar-dark bg-dark mb-3">
+    <div class="container justify-content-center">
+      <a href="#" class="navbar-brand">WooCommerce API</a>
+    </div>
+  </nav>
+  <section id="main" class="container">
+    
+    <div class="jumbotron mb-0" style="background-color: aquamarine;">
+      <h3>Interface de teste da API RESTful do sistema de e-commerce baseado em WooCommerce</h3>
+      <p class="lead">Projeto desenvolvido para a disciplina de Comércio Eletrônico do curso de Sistemas de Informação do IFES Serra, ministrada pelo Prof. Filipe Mutz.</p>
+      <h5>Alunos:</h5>
+      <ul class="list-inline d-flex justify-content-center">
+        <li class="list-inline-item lead">Gary Moura da Silva,</li>
+        <li class="list-inline-item lead">Paulo Ricardo Viana,</li>
+        <li class="list-inline-item lead">Jennifer Gonçalves do Amaral</li>
+      </ul>
+      <p class=" font-italic lead text-center">Agosto 2020</p>
+    </div> <!-- jumbotron -->
+
+    <hr class="my-4">
+
+    <!-- LIST ALL PRODUCT -->
+    <form id="list-product-form" class="border border-dark rounded p-4 mb-4">
+      <div class="form-group row">
+        <h5 class="col-9">GET /webservice/produto</h5>
+        <button class="btn btn-outline-primary col-3" type="submit">EXECUTAR</button>
+      </div>
+      <pre class="pre-scrollable bg-dark border rounded" id="list-product-pre-code"><code id="list-product-code" class="text-white"></code></pre>
+    </form>
+
+    <!-- GET ONE PRODUCT -->
+    <form id="get-product-form" class="border border-dark rounded p-4 mb-4">
+      <div class="form-group row">
+        <h5 class="col-9">GET /webservice/produto/:id_produto</h5>
+        <button class="btn btn-outline-primary col-3" type="submit">EXECUTAR</button>
+      </div>
+      <div class="row mb-2">
+        <div class="input-group col">
+          <div class="input-group-prepend">
+            <span class="input-group-text app-product-url"></span> <!-- filled by JS, dinamically -->
+          </div>
+          <input type="number" id="get-product-input" class="form-control flex-grow-1" placeholder="id do produto" required>
+        </div>
+      </div>
+      <pre class="pre-scrollable bg-dark border rounded" id="get-product-pre-code"><code id="get-product-code" class="text-white"></code></pre>
+    </form>
+    
+    <!-- POST PRODUCT -->
+    <form id="post-product-form" class="border border-dark rounded p-4 mb-4">
+      <div class="form-group row">
+        <h5 class="col-9">POST /webservice/produto</h5>
+        <button type="submit" class="btn btn-outline-primary col-3">EXECUTAR</button>
+      </div>
+
+      <div class="row mb-2">
+        <div class="input-group col">
+          <div class="input-group-prepend">
+            <span class="input-group-text flex-column text-left">
+              Modelo do corpo da requisição<br><br>
+              <pre><code class="product-body-template"></code></pre>
+            </span>
+          </div>
+          <textarea class="pre-scrollable form-control bg-dark text-white" name="post-product-body" id="post-product-body" required></textarea>
+        </div>
+      </div>
+
+      <pre class="pre-scrollable bg-dark border rounded" id="post-product-pre-code"><code id="post-product-code" class="text-white"></code></pre>
+    </form>
+
+    <!-- PUT PRODUCT -->
+    <form id="put-product-form" class="border border-dark rounded p-4 mb-4">
+      <div class="form-group row">
+        <h5 class="col-9">PUT /webservice/produto/:id_produto</h5>
+        <button type="submit" class="btn btn-outline-primary col-3">EXECUTAR</button>
+      </div>
+      <div class="row mb-2">
+        <div class="input-group col">
+          <div class="input-group-prepend">
+            <span class="input-group-text app-product-url"></span> <!-- filled by JS, dinamically -->
+          </div>
+          <input type="number" id="put-product-input" class="form-control flex-grow-1" placeholder="id do produto" required>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="input-group col">
+          <div class="input-group-prepend">
+            <span class="input-group-text flex-column text-left">
+              Modelo do corpo da requisição<br><br>
+              <pre><code class="product-body-template"></code></pre>
+            </span>
+          </div>
+          <textarea class="pre-scrollable form-control bg-dark text-white" name="put-product-body" id="put-product-body" required></textarea>
+        </div>
+      </div>
+      <pre class="pre-scrollable bg-dark border rounded" id="put-product-pre-code"><code id="put-product-code" class="text-white"></code></pre>
+    </form>
+    
+    <!-- DELETE PRODUCT -->
+    <form id="delete-product-form" class="border border-dark rounded p-4 mb-4">
+      <div class="form-group row">
+        <h5 class="col-9">DELETE /webservice/produto/:id_produto</h5>
+        <button class="btn btn-outline-primary col-3" type="submit">EXECUTAR</button>
+      </div>
+      <div class="row mb-2">
+        <div class="input-group col">
+          <div class="input-group-prepend">
+            <span class="input-group-text app-product-url"></span> <!-- filled by JS, dinamically -->
+          </div>
+          <input type="number" id="delete-product-input" class="form-control flex-grow-1" placeholder="id do produto" required>
+        </div>
+      </div>
+      <pre class="pre-scrollable bg-dark border rounded" id="delete-product-pre-code"><code id="delete-product-code" class="text-white"></code></pre>
+    </form>
+    
+    <!-- STATS FORM -->
+    <form id="get-stats-form" class="border border-dark rounded p-4 mb-4">
+      <div class="form-group row">
+        <h5 class="col-9">GET /webservice/stats</h5>
+        <button type="submit" class="btn btn-outline-primary col-3">EXECUTAR</button>
+      </div>
+      <pre class="pre-scrollable bg-dark border rounded" id="get-stats-pre-code"><code id="get-stats-code" class="text-white"></code></pre>
+    </form>
+  </section>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="./scripts/index.js"></script>
+</body>
+</html>
