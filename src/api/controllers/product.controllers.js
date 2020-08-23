@@ -138,7 +138,12 @@ function putProduct (req, res) {
       productUri: 'http://'+req.headers.host+req.baseUrl+'/'+productId
     };
 
-    res.status(201).json(responseData);
+    if (result && result.affectedRows > 0) {
+      res.status(201).json(responseData);
+    } else {
+      const message = 'O código de produto informado não existe, nenhum dado foi alterado!';
+      res.status(404).send(message);
+    }
   });
 }
 
