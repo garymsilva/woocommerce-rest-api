@@ -4,7 +4,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const viewRouter = require('./api/routes/view.routes');
 const productsRouter = require('./api/routes/products.routes');
 const statsRouter = require('./api/routes/stats.routes');
 
@@ -21,7 +20,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // set routes
-app.use('/', viewRouter);
 app.use('/webservice/produto', productsRouter);
 app.use('/webservice/stats', statsRouter);
 
@@ -41,7 +39,6 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
 });
 
 module.exports = app;

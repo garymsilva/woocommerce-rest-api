@@ -6,8 +6,8 @@ function selectAllProducts (callback) {
     p.ID AS productId,\
     p.post_title AS productName,\
     p.post_content AS productDescription,\
-    price.meta_value AS productPrice,\
-    stock.meta_value AS productStock\
+    CAST((price.meta_value) AS DECIMAL(10, 2)) AS productPrice,\
+    CAST((stock.meta_value) AS UNSIGNED) AS productStock\
   FROM wp_posts as p\
   JOIN (SELECT post_id, meta_value FROM wp_postmeta WHERE meta_key="_price") AS price\
 	  ON price.post_id = p.ID\
@@ -23,7 +23,7 @@ function selectAllProducts (callback) {
       return;
     }
 
-    callback(error, result); // TODO: Tratar a formatação do texto.
+    callback(error, result);
   });
 }
 
@@ -33,8 +33,8 @@ function selectProduct (productId, callback) {
     p.ID AS productId,\
     p.post_title AS productName,\
     p.post_content AS productDescription,\
-    price.meta_value AS productPrice,\
-    stock.meta_value AS productStock\
+    CAST((price.meta_value) AS DECIMAL(10, 2)) AS productPrice,\
+    CAST((stock.meta_value) AS UNSIGNED) AS productStock\
   FROM wp_posts AS p\
   JOIN (SELECT post_id, meta_value FROM wp_postmeta WHERE meta_key="_price") AS price\
 	  ON price.post_id = p.ID\
@@ -52,7 +52,7 @@ function selectProduct (productId, callback) {
       return;
     }
 
-    callback(error, result); // TODO: Tratar a formatação do texto.
+    callback(error, result);
   });
 }
 
@@ -243,7 +243,7 @@ function deleteProduct (productId, callback) {
       return;
     }
 
-    const query1 = `DELETE FROM wp_posts WHERE ID=?`;
+    const query1 = `DELETE FROM wp_posts WHERE ID=? AND post_type='product'`;
 
     conn.query(query1, productId, function (error, result) {
       if (error) {
