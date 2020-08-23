@@ -47,13 +47,13 @@ function validateProduct(product) {
   if (validation.missing.length || validation.wrongTyped.length || validation.negativeNumber.length) {
     ok = false;
     
-    const missingAttributesMessage = 'Atributos obrigatórios não foram encontrados na requisição ou estão com uma sintaxe inválida!\n' + JSON.stringify(validation.missing) + '\n\n';
-    const wrongTypedMessage = 'O tipo de um ou mais atributos não corresponde ao esperado pelo servidor!\n' + JSON.stringify(validation.wrongTyped) + '\n\n';
-    const negativeNumberMessage = 'O valor fornecido para um ou mais atributos não pode ser menor que zero!\n' + JSON.stringify(validation.negativeNumber) + '\n\n';
+    const missingAttributesMessage = 'Atributos obrigatórios não foram encontrados na requisição ou estão com uma sintaxe inválida: \n' + validation.missing + '.\n\n';
+    const wrongTypedMessage = 'O tipo de um ou mais atributos não corresponde ao esperado pelo servidor: \n' + validation.wrongTyped + '.\n\n';
+    const negativeNumberMessage = 'O valor fornecido para um ou mais atributos não pode ser menor que zero: \n' + validation.negativeNumber + '.\n\n';
 
     if (validation.missing.length) message += missingAttributesMessage;
     if (validation.wrongTyped.length) message += wrongTypedMessage;
-    if (validation.negativeNumber) message += negativeNumberMessage;
+    if (validation.negativeNumber.length) message += negativeNumberMessage;
   }
 
   return {
@@ -87,7 +87,7 @@ function getProduct (req, res) {
     if (result && result.length) {
       res.status(200).json(result[0]);
     } else {
-      res.status(404).send();
+      res.status(404).send('O código de produto informado não existe!');
     }
   });
 }
@@ -152,7 +152,14 @@ function deleteProduct (req, res) {
       return;
     }
 
-    res.status(200).send();
+    let message = '';
+    if (result && result.affectedRows > 0) {
+      message = 'O produto foi excluído!'
+      res.status(200).json({message: message});
+    } else {
+      message = 'O código de produto informado não existe, nenhum dado foi excluído!';
+      res.status(404).send(message);
+    }
   });
 }
 
